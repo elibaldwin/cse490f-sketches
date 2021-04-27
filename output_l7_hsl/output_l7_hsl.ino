@@ -17,6 +17,23 @@
 
 #include "src/RGBConverter/RGBConverter.h"
 
+const int BUF_SIZE = 16;
+class RingBuffer {
+  private:
+    int buf[BUF_SIZE];
+    int sum;
+    int i;
+
+  public:
+    int update_buf(int val) {
+      sum -= buf[i];
+      sum += val;
+      buf[i] = val;
+      i = (i+1) % BUF_SIZE;
+      return sum / BUF_SIZE;
+    }
+};
+
 // Change this to based on whether you are using a common anode or common cathode
 // RGB LED. See: https://makeabilitylab.github.io/physcomp/arduino/rgb-led 
 // If you are working with a common cathode RGB LED, set this to false.
@@ -25,8 +42,13 @@ const boolean COMMON_ANODE = false;
 const int RGB_RED_PIN = 6;
 const int RGB_GREEN_PIN  = 5;
 const int RGB_BLUE_PIN  = 3;
-const int DELAY_INTERVAL = 10; // interval in ms between incrementing hues
+const int DELAY_INTERVAL = 5; // interval in ms between incrementing hues
 const byte MAX_RGB_VALUE = 255;
+
+const int POT_PIN = A0;
+RingBuffer smooth_buf;
+const int POT_MIN = 125;
+const int POT_MAX = 930;
 
 float _hue = 0; //hue varies between 0 - 1
 float _step = 0.001f;
@@ -44,6 +66,8 @@ void setup() {
 }
 
 void loop() {
+  int potVal = smooth_buf.update_buf(analogRead(POT_PIN));
+  _hue =  constrain(potVal - POT_MIN, 0, POT_MAX-POT_MIN) / (float)(POT_MAX-POT_MIN);
 
   // Convert current hue, saturation, and lightness to RGB
   // The library assumes hue, saturation, and lightness range from 0 - 1
@@ -52,7 +76,9 @@ void loop() {
   byte rgb[3];
   _rgbConverter.hslToRgb(_hue, 1, 0.5, rgb);
 
-  Serial.print("hue=");
+  Serial.print("potVal=");
+  Serial.print(potVal);
+  Serial.print(" hue=");
   Serial.print(_hue);
   Serial.print(" r=");
   Serial.print(rgb[0]);
@@ -63,14 +89,8 @@ void loop() {
   
   setColor(rgb[0], rgb[1], rgb[2]); 
 
-  // update hue based on step size
-  _hue += _step;
-
-  // hue ranges between 0-1, so if > 1, reset to 0
-  if(_hue > 1.0){
-    _hue = 0;
-  }
-
+  
+  
   delay(DELAY_INTERVAL);
 }
 

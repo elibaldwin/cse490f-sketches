@@ -13,28 +13,28 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  setRGBColor(LOW, LOW, LOW);
+  setRGBColor(LOW, LOW, LOW);  // off
   delay(DELAY_MS);
   
-  setRGBColor(HIGH, LOW, LOW);
+  setRGBColor(HIGH, LOW, LOW); // red
   delay(DELAY_MS);
 
-  setRGBColor(LOW, HIGH, LOW);
+  setRGBColor(LOW, HIGH, LOW); // green
   delay(DELAY_MS);
 
-  setRGBColor(LOW, LOW, HIGH);
+  setRGBColor(LOW, LOW, HIGH); // blue
   delay(DELAY_MS);
 
-  setRGBColor(HIGH, LOW, HIGH);
+  setRGBColor(HIGH, LOW, HIGH);// purple
   delay(DELAY_MS);
 
-  setRGBColor(LOW, HIGH, HIGH);
+  setRGBColor(LOW, HIGH, HIGH);// cyan
   delay(DELAY_MS);
 
-  setRGBColor(HIGH, HIGH, LOW);
+  setRGBColor(HIGH, HIGH, LOW);// yellow
   delay(DELAY_MS);
 
-  setRGBColor(HIGH, HIGH, HIGH);
+  setRGBColor(HIGH, HIGH, HIGH);//white
   delay(DELAY_MS);
 }
 

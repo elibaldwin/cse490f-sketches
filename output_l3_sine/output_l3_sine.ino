@@ -1,3 +1,5 @@
+// this is a variation on the basic LED fade from https://makeabilitylab.github.io/physcomp/arduino/led-fade.html
+
 const int LED_OUTPUT_PIN = 3;
 const int MAX_ANALOG_OUT = 255; // the max analog output on the Uno is 255
 const float DIVISOR = 720.0;

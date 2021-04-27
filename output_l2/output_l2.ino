@@ -1,3 +1,5 @@
+// heavily based on https://makeabilitylab.github.io/physcomp/arduino/led-blink.html
+
 const int LED_OUT_PIN = 3;
 const int INTERVAL = 1000;
 
