@@ -47,8 +47,8 @@ const byte MAX_RGB_VALUE = 255;
 
 const int POT_PIN = A0;
 RingBuffer smooth_buf;
-const int POT_MIN = 125;
-const int POT_MAX = 930;
+const int POT_MIN = 220;
+const int POT_MAX = 900;
 
 float _hue = 0; //hue varies between 0 - 1
 float _step = 0.001f;
