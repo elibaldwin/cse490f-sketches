@@ -48,7 +48,7 @@ const byte MAX_RGB_VALUE = 255;
 const int POT_PIN = A0;
 RingBuffer smooth_buf;
 const int POT_MIN = 220;
-const int POT_MAX = 900;
+const int POT_MAX = 960;
 
 float _hue = 0; //hue varies between 0 - 1
 float _step = 0.001f;
@@ -89,7 +89,6 @@ void loop() {
   
   setColor(rgb[0], rgb[1], rgb[2]); 
 
-  
   
   delay(DELAY_INTERVAL);
 }
