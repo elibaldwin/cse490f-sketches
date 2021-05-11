@@ -26,6 +26,8 @@
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
+const int POT_PIN = A0;
+
 int ball_x = SCREEN_WIDTH / 2;
 int ball_y = (SCREEN_HEIGHT - 10) / 2;
 int ball_rad = 3;
@@ -49,6 +51,9 @@ void loop() {
   // On each loop, we'll want to clear the display so we're not writing over
   // previously drawn data
   _display.clearDisplay(); 
+
+  int pot_val = analogRead(POT_PIN);
+  ball_rad = map(pot_val, 0, 1023, 2, 12);
 
   ball_x += ball_dx;
   ball_y += ball_dy;

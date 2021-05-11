@@ -9,6 +9,5 @@ void setup() {
 
 void loop() {
   int pot_val = analogRead(POT_PIN);
-
   analogWrite(VIB_PIN, map(pot_val, 0, 1023, 0, 255));
 }
