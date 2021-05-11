@@ -53,7 +53,7 @@ void loop() {
   _display.clearDisplay(); 
 
   int pot_val = analogRead(POT_PIN);
-  ball_rad = map(pot_val, 0, 1023, 2, 12);
+  ball_rad = map(pot_val, 0, 4095, 2, 12);
 
   ball_x += ball_dx;
   ball_y += ball_dy;
@@ -70,5 +70,5 @@ void loop() {
   // Render the graphics buffer to screen
   _display.display(); 
 
-  delay(25);
+  delay(5);
 }

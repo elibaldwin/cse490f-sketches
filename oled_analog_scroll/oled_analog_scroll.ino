@@ -22,8 +22,8 @@ Adafruit_SSD1306 _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 const int ANALOG_INPUT_PIN = A0;
 const int MIN_ANALOG_INPUT = 0;
-const int MAX_ANALOG_INPUT = 1023;
-const int DELAY_LOOP_MS = 1; // change to slow down how often to read and graph value
+const int MAX_ANALOG_INPUT = 4095;
+const int DELAY_LOOP_MS = 0; // change to slow down how often to read and graph value
 
 int _circularBuffer[SCREEN_WIDTH]; //fast way to store values 
 int _curWriteIndex = 0; // tracks where we are in the circular buffer
