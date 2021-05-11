@@ -1,6 +1,12 @@
-/*
+/*  Elias Baldwin
+ *   
+ *  This program creates a bouncing ball on the Adafruit SSD1306 display,
+ *  which accelerates around the display using tilt/motion from the accelerometer
+ *  and bounces off the walls. Includes an FPS display in the top left corner.
  * 
- * 
+ *  Uses Adafruit LIS3DH Accelerometer, and works with the Adafruit ESP32 Feather board.
+ *  (might work with Arduino Leonardo with the right pin configuration, but likely
+ *  would result in lower framerates or out-of-memory issues)
  */
 
 #include <SPI.h>
@@ -100,20 +106,26 @@ void loop() {
 
 void physicsUpdate() {
   int pot_val = analogRead(POT_PIN);
-  float v_scale = (float)pot_val / (float)ANALOG_MAX;
+  float acc_scale = (float)pot_val / (float)ANALOG_MAX;
 
+  // fetch values from the accelerometer
   sensors_event_t event;
   lis.getEvent(&event);
-  
-  ball_dx += v_scale * GRAV_SCALER * -event.acceleration.x;
-  ball_dy += v_scale * GRAV_SCALER * event.acceleration.y;
 
+  // depending on orientation of accelerometer relative to display, 
+  // x / y acceleration values might need to be switched or negated
+  ball_dx += acc_scale * GRAV_SCALER * -event.acceleration.x;
+  ball_dy += acc_scale * GRAV_SCALER * event.acceleration.y;
+
+  // friction decay
   ball_dx *= FRICTION;
   ball_dy *= FRICTION;
 
+  // move ball position using velocity
   ball_x += ball_dx;
   ball_y += ball_dy;
 
+  // collision checks for each 'wall' of the display
   if (ball_x - ball_rad < 0) {
     ball_x = ball_rad;
     ball_dx *= -ELASTICITY;
