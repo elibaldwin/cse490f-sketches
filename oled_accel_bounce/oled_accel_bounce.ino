@@ -108,6 +108,8 @@ void physicsUpdate() {
   int pot_val = analogRead(POT_PIN);
   float acc_scale = (float)pot_val / (float)ANALOG_MAX;
 
+  acc_scale = 0.5;
+
   // fetch values from the accelerometer
   sensors_event_t event;
   lis.getEvent(&event);
