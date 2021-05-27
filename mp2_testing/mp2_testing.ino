@@ -62,6 +62,8 @@ void setup() {
   _display.clearDisplay();    
   _display.setTextSize(1);
   _display.setTextColor(WHITE, BLACK); 
+
+  // put the screen in a vertical orientation
   _display.setRotation(3);
 
   Serial.println("LIS3DH test!");

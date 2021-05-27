@@ -8,6 +8,12 @@
  *  This is a utility class that I made, pretty much just used to keep
  *  track of the different platforms that are generated and rendered
  *  for the Jump! game.
+ *  
+ *  The basic idea is to have a buffer of fixed maximum size, with 
+ *  constant time push_back and pop_front operations, as well
+ *  as constant time indexing. This allows adding platforms to the back
+ *  and removing them from the front. It's also still relatively easy
+ *  to iterate through the structure using the overloaded subscript operator.
  * 
  */
 
